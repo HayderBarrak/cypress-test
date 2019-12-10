@@ -5,3 +5,16 @@ jobs:
       - image: cypress/base:10
     steps:
       - checkout
+test1:
+    docker:
+      - image: 'cypress/base:10'
+        environment:
+          TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: ls -la cypress
+      - run: ls -la cypress/integration
+      - run:
+          name: Running cypress tests 1
+          command: $(npm bin)/cypress run --spec cypress/integration/sample1.spec.js
