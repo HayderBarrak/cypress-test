@@ -1,6 +1,7 @@
 version: 2
 jobs:
-  test:
+  build:
     docker:
-      - image: circleci/<language>:<version TAG>
-    parallelism: 4
+      - image: cypress/base:10
+    steps:
+      - checkout
