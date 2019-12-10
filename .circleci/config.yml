@@ -1,44 +1,57 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: cypress/base:10
-    steps:
+--- 
+jobs: 
+  build: 
+    docker: 
+      - 
+        image: "cypress/base:10"
+    steps: 
       - checkout
-test1:
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
-      - run:
-          name: Running cypress tests 1
-          command: $(npm bin)/cypress run --spec cypress/integration/sample1.spec.js
-test2:
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
-      - run:
-          name: Running cypress tests 1
-          command: $(npm bin)/cypress run --spec cypress/integration/sample2.spec.js
-          workflows:
-  version: 2
-  build_and_test:
-    jobs:
+test1: 
+  docker: 
+    - 
+      environment: 
+        TERM: xterm
+      image: "cypress/base:10"
+  steps: 
+    - 
+      attach_workspace: 
+        at: ~/
+    - 
+      run: "ls -la cypress"
+    - 
+      run: "ls -la cypress/integration"
+    - 
+      run: 
+        command: "$(npm bin)/cypress run --spec cypress/integration/sample1.spec.js"
+        name: "Running cypress tests 1"
+test2: 
+  docker: 
+    - 
+      environment: 
+        TERM: xterm
+      image: "cypress/base:10"
+  steps: 
+    - 
+      attach_workspace: 
+        at: ~/
+    - 
+      run: "ls -la cypress"
+    - 
+      run: "ls -la cypress/integration"
+    - 
+      run: 
+        command: "$(npm bin)/cypress run --spec cypress/integration/sample2.spec.js"
+        name: "Running cypress tests 1"
+version: 2
+workflows: 
+  build_and_test: 
+    jobs: 
       - build
-      - test1:
-          requires:
+      - 
+        test1: 
+          requires: 
             - build
-      - test2:
-          requires:
+      - 
+        test2: 
+          requires: 
             - build
