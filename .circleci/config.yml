@@ -55,3 +55,4 @@ workflows:
         test2: 
           requires: 
             - build
+  version: 2
